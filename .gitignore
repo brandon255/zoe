@@ -1,0 +1,93 @@
+# Zoe local agent — never commit raw or derived private media
+reference-vault/private/
+reference-vault/**/*.private.*
+
+# Tier 2 outputs (large, generated) — keep recent + selected only
+images/zoe_body_outfit_*.png
+images/zoe_body_bed_*.png
+
+# Persona and chat runtime — never commit
+.venv/
+__pycache__/
+*.pyc
+.tts_cache/
+
+# Pose library pre-render outputs (regenerable, large)
+assets/poses/*/seed_*.png
+
+# Virtual environments (all of them)
+venv/
+.venv/
+**/venv/
+**/.venv/
+SadTalker/venv/
+webui/venv/
+
+# Node modules and web dependencies
+node_modules/
+**/node_modules/
+webui/node_modules/
+
+# Model weights and checkpoints (too large for git)
+*.pth
+*.pth.tar
+*.safetensors
+*.bin
+*.onnx
+*.engine
+checkpoints/
+gfpgan/weights/
+**/checkpoints/
+**/weights/
+
+# Large datasets and media
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wav
+*.mp3
+assets/models/
+assets/datasets/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git metadata in subdirectories
+**/.git/
+
+# Build artifacts and logs
+*.log
+dist/
+build/
+*.egg-info/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Python specific
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Large generated files
+assets/outputs/
+assets/generated/
