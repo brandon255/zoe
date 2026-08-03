@@ -1,0 +1,12 @@
+{
+  "id": "test-smoke-1",
+  "title": "add smoke marker",
+  "rationale": "verifies auto-apply for safe markdown",
+  "target": "test/fixtures/_smoke.md",
+  "proposed": "undefined\n<!-- test-fixture-1785621890551-62jyka -->\n",
+  "autoApply": true,
+  "safeCategory": "markdown-doc",
+  "createdAt": "2026-08-01T22:04:50.587Z",
+  "status": "auto-applied",
+  "appliedAt": "2026-08-01T22:04:50.587Z"
+}

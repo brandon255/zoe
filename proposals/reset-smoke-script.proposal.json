@@ -1,0 +1,12 @@
+{
+  "id": "reset-smoke-script",
+  "title": "reset script fixture",
+  "rationale": "smoke test setup",
+  "target": "scripts/_smoke.py",
+  "proposed": "CHANGED = True  # replaced by smoke test\n",
+  "autoApply": false,
+  "safeCategory": "code or comment deletions detected (1 code, 0 comment removals)",
+  "createdAt": "2026-08-01T22:04:50.630Z",
+  "status": "applied",
+  "appliedAt": "2026-08-01T22:04:50.669Z"
+}

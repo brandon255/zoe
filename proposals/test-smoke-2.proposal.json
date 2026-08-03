@@ -1,0 +1,11 @@
+{
+  "id": "test-smoke-2",
+  "title": "rewrite code",
+  "rationale": "verifies code changes are not auto-applied",
+  "target": "scripts/_smoke.py",
+  "proposed": "CHANGED = False  # replaced by smoke test\n",
+  "autoApply": false,
+  "safeCategory": "code or comment deletions detected (1 code, 0 comment removals)",
+  "createdAt": "2026-08-01T22:04:50.744Z",
+  "status": "pending"
+}

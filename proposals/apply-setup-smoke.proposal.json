@@ -1,0 +1,12 @@
+{
+  "id": "apply-setup-smoke",
+  "title": "reset script fixture for apply test",
+  "rationale": "smoke test setup",
+  "target": "scripts/_smoke.py",
+  "proposed": "CHANGED = True  # replaced by smoke test\n",
+  "autoApply": false,
+  "safeCategory": "no change",
+  "createdAt": "2026-08-01T22:04:50.821Z",
+  "status": "applied",
+  "appliedAt": "2026-08-01T22:04:50.866Z"
+}
