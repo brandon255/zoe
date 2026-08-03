@@ -1,0 +1,7 @@
+{
+  "id": "test-decision-1",
+  "question": "Pick the default LLM tier",
+  "context": "Qwen 14B, Mistral Small 24B, or local 32B?",
+  "createdAt": "2026-08-01T22:04:51.018Z",
+  "status": "open"
+}
