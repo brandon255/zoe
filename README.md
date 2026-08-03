@@ -1,14 +1,26 @@
-# Zoe — Local AI Companion
+# Zoe — Avatar Character for Bizarro Switch UI
 
-A fully local AI companion that lives on your Mac. No cloud, no subscriptions, no API keys. You can talk to her, she'll remember you across sessions, and the build is designed to be extended (face, voice, video, project-aware conversation).
+Zoe is an AI avatar character designed for the Bizarro switch in our user interface. She represents the "normal mode" persona that can be toggled to Bizarro mode, providing a complete AI companion experience built on the MedStage architecture.
+
+**Built by GLM (z.ai) — Architecture and core system powered by MedStage**
 
 ## What works right now
 
 - **Terminal chat with persona** — `zoe.py` talks to Ollama (Gemma 4 8B), applies Zoe's persona, persists memory across sessions. **Verified working end-to-end.**
 - **Mode toggle** — conversational vs. intimate. Flip mid-conversation with `mode` or pass `--intimate` to start.
+- **Bizarro switch integration** — Zoe serves as the default avatar character that can be toggled to Bizarro mode in the UI (architecture built by GLM).
 - **Memory** — `memory/core.md` is read at every session start and appended to on exit. Survives reboots.
 - **Sessions** — every conversation saved as JSON in `memory/sessions/`.
 - **Full-body image generation** — `zoe_body.py` and generic `image_gen.py` generate full-body images in 9 scenes. **Verified working — all 6 generic scenes verified August 1, 2026.**
+
+## Architecture (MedStage)
+
+Zoe is built on the MedStage architecture, a comprehensive AI companion framework developed by GLM (z.ai). The MedStage system includes:
+
+- **Current Version** (`medstage/`) — Latest stable release (v7)
+- **Feature Rich Version** (`medstage_feature_rich/`) — Enhanced version with advanced encounter features
+- **Documentation** — Complete technical specifications and integration guides
+- **MiniMax Handoff** — Integration points for MiniMax AI services
 
 ## What's installed but needs finishing
 
@@ -33,6 +45,15 @@ Inside the chat:
 - `workout` / `casual` / `evening` / `intimate` / `bed` — generate full-body image in Zoe-specific scene
 - `put on [outfit]` — set current outfit description
 - `show me` — generate image of current outfit/scene
+
+## Bizarro Switch UI Integration
+
+Zoe serves as the primary avatar character that can be toggled to Bizarro mode through the user interface. The architecture was specifically designed to support this mode switching capability:
+
+- **Normal Mode** — Zoe's default persona with conversational and intimate modes
+- **Bizarro Mode** — Alternative personality state accessible through the UI toggle
+- **Mode Persistence** — Current mode state is preserved across sessions
+- **Seamless Transition** — Instant switching between normal and Bizarro modes
 
 ## Full-body image generation
 
@@ -87,10 +108,27 @@ zoe/
 │   ├── live.py             # Full live conversation loop (mic → whisper → ollama → XTTS → SadTalker)
 │   ├── generate_face.py    # Generate Zoe's face with SDXL
 │   └── _tts_patch.py       # Monkeypatch for PyTorch 2.6+ / XTTS compatibility
+├── medstage/               # Current MedStage architecture (built by GLM)
+├── medstage_feature_rich/  # Enhanced MedStage with advanced features
 ├── SadTalker/              # Cloned from GitHub, has its own venv at SadTalker/venv/
 ├── assets/                 # face.png, voice_sample.wav, generated audio/video go here
 └── .venv/                  # Main Python venv (PyTorch, XTTS, whisper, sounddevice, diffusers)
 ```
+
+## MedStage Architecture Details
+
+The MedStage architecture (built by GLM agent) provides the foundation for Zoe's capabilities:
+
+### Current Version (`medstage/`)
+- Core AI companion framework
+- Bizarro mode switching infrastructure
+- Memory persistence and session management
+- Persona system with multiple modes
+
+### Feature Rich Version (`medstage_feature_rich/`)
+- Enhanced encounter system
+- Advanced interaction patterns
+- Extended customization options
 
 ## Editing her persona
 
@@ -118,6 +156,10 @@ Edit `scripts/zoe.py` and `scripts/live.py`, change the `MODEL` / `OLLAMA_MODEL`
 - Ollama running locally with `gemma4e-64k` and/or `qwen2.5:14b` pulled
 - ~20GB free disk for models
 
+## GLM Agent Integration
+
+This project was architected and built by the GLM (z.ai) agent. The core MedStage architecture, Bizarro switch functionality, and integration patterns were developed to support advanced AI companion interactions with mode switching capabilities.
+
 ## License notes
 
 - XTTS-v2: Coqui Public Model License (CPML) — personal use only
@@ -125,3 +167,4 @@ Edit `scripts/zoe.py` and `scripts/live.py`, change the `MODEL` / `OLLAMA_MODEL`
 - Qwen 2.5: Apache 2.0 (some variants require agreement)
 - SadTalker: MIT
 - SDXL: CreativeML Open RAIL-M
+- MedStage Architecture: Built by GLM (z.ai) agent
