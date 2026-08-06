@@ -16,6 +16,33 @@ export function PizarroMediaBay({ visible }: PizarroMediaBayProps) {
       </div>
 
       <div className="pizarro-media-block">
+        <div className="pizarro-media-label">Zoe head on uploaded body (5s)</div>
+        <video
+          className="pizarro-media-video"
+          src="/pizarro/zoe-on-charlie14.mp4"
+          controls
+          playsInline
+          loop
+          muted
+          autoPlay
+          preload="metadata"
+        />
+      </div>
+
+      <div className="pizarro-media-block">
+        <div className="pizarro-media-label">Side-by-side (Zoe | original drive)</div>
+        <video
+          className="pizarro-media-video"
+          src="/pizarro/zoe-on-charlie14-concat.mp4"
+          controls
+          playsInline
+          loop
+          muted
+          preload="metadata"
+        />
+      </div>
+
+      <div className="pizarro-media-block">
         <div className="pizarro-media-label">Zoe face sample (LivePortrait)</div>
         <video
           className="pizarro-media-video"
