@@ -16,6 +16,33 @@ export function PizarroMediaBay({ visible }: PizarroMediaBayProps) {
       </div>
 
       <div className="pizarro-media-block">
+        <div className="pizarro-media-label">Zoe face sample (LivePortrait)</div>
+        <video
+          className="pizarro-media-video"
+          src="/pizarro/zoe-face-sample.mp4"
+          controls
+          playsInline
+          loop
+          muted
+          autoPlay
+          preload="metadata"
+        />
+      </div>
+
+      <div className="pizarro-media-block">
+        <div className="pizarro-media-label">Side-by-side (Zoe | driving)</div>
+        <video
+          className="pizarro-media-video"
+          src="/pizarro/zoe-face-sample-concat.mp4"
+          controls
+          playsInline
+          loop
+          muted
+          preload="metadata"
+        />
+      </div>
+
+      <div className="pizarro-media-block">
         <div className="pizarro-media-label">Prop still — black toy</div>
         <img
           className="pizarro-media-image"
