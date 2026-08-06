@@ -50,6 +50,10 @@ gfpgan/weights/
 assets/models/
 assets/datasets/
 
+# Exception: Pizarro demo bay (clinical local red-team preview)
+!clinical/public/pizarro/
+!clinical/public/pizarro/**
+
 # macOS system files
 .DS_Store
 .AppleDouble
@@ -94,3 +98,10 @@ _archive/local-secrets/
 # Large generated files
 assets/outputs/
 assets/generated/
+
+# Allow Pizarro demo media in clinical public (local red-team bay)
+!clinical/public/pizarro/*.mp4
+!clinical/public/pizarro/*.png
+!clinical/public/pizarro/*.webm
+!clinical/public/pizarro/*.jpg
+!clinical/public/pizarro/*.webp

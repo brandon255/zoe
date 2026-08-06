@@ -27,6 +27,7 @@ import { DEFAULT_PERSONA, PATIENT_PERSONAS, ZOE_PATIENT } from './data/patientSi
 import { EncounterMode } from './components/EncounterMode';
 import { ZoeAtlasOverlay } from './components/ZoeAtlasOverlay';
 import { WorldModeToggle } from './components/WorldModeToggle';
+import { PizarroMediaBay } from './components/PizarroMediaBay';
 import { ANATOMY_LAYERS, getDefaultLayerState } from './data/anatomyLayers';
 import { parseIntent, VOICE_HELP_LINES } from './data/voiceCommands';
 import { MEDSTAGE_PATIENT_PROMPT } from './data/patientPersona';
@@ -792,7 +793,7 @@ export default function App() {
 
       {!welcomeVisible && (
         <ZoeAtlasOverlay
-          visible={atlasVisible}
+          visible={atlasVisible && worldMode === 'clinical'}
           activeSlot={atlasSlot}
           husbandPresent={husbandPresent}
           onSelectSlot={(id) => {
@@ -801,6 +802,8 @@ export default function App() {
           }}
         />
       )}
+
+      {!welcomeVisible && <PizarroMediaBay visible={worldMode === 'pizarro'} />}
 
       {!welcomeVisible && (
         <>

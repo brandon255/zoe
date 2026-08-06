@@ -39,8 +39,18 @@ test('patient simulator injects worldMode and hard-rail precheck', () => {
   assert.match(sim, /buildWorldSystemPrompt/);
 });
 
+test('Pizarro media bay wires dildo still and clip', () => {
+  const bay = read('src/components/PizarroMediaBay.tsx');
+  const app = read('src/App.tsx');
+  assert.match(bay, /zoe-dildo\.png/);
+  assert.match(bay, /zoe-ref-clip\.mp4/);
+  assert.match(app, /PizarroMediaBay/);
+  assert.match(app, /worldMode === 'pizarro'/);
+});
+
 test('pediatric clinical case stays general profile (not Pizarro sexual)', () => {
   const cases = read('src/data/patientCases.ts');
   assert.match(cases, /id: 'pediatric-fall'[\s\S]*contentProfile: 'general'/);
   assert.match(cases, /id: 'pizarro-acute-freakout'/);
 });
+
