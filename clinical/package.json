@@ -1,0 +1,30 @@
+{
+  "name": "medstage",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "MedStage — voice-driven 3D medical anatomy prototype for the Doctrine Labs independent medical-training prototype",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run prompt:sync && tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "node --test test/*.test.js",
+    "prompt:sync": "node scripts/sync-prompt.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.165.0",
+    "@react-three/fiber": "^8.16.8",
+    "@react-three/drei": "^9.108.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.4"
+  }
+}

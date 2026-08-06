@@ -88,6 +88,9 @@ htmlcov/
 .env.local
 .env.*.local
 
+# Local secrets archive (API keys in folder names — Mac-only, never push)
+_archive/local-secrets/
+
 # Large generated files
 assets/outputs/
 assets/generated/

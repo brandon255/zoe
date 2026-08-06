@@ -1,0 +1,30 @@
+# MedStage 3D Generation Service — Python dependencies
+# For self-hosting TripoSR (open source, MIT license)
+# https://github.com/VAST-AI-Research/TripoSR
+
+# Web server
+flask>=2.3.0
+flask-cors>=4.0.0
+gunicorn>=21.0.0
+
+# Deep learning
+torch>=2.1.0
+torchvision>=0.16.0
+
+# TripoSR (open source image-to-3D, MIT)
+# Install directly from the GitHub repo since it's not on PyPI
+# pip install git+https://github.com/VAST-AI-Research/TripoSR.git
+
+# Image processing
+Pillow>=9.0.0
+numpy>=1.24.0
+rembg>=2.0.50  # background removal
+onnxruntime>=1.15.0  # for rembg
+
+# 3D mesh processing
+trimesh>=4.0.0
+networkx>=3.0  # required by trimesh
+pygltflib>=1.15.0  # for GLB export
+
+# Optional: HuggingFace for model downloads
+huggingface-hub>=0.19.0
