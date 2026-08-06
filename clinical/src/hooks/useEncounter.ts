@@ -44,6 +44,8 @@ export interface UseEncounterProps {
   patientProfile: SpeakerProfile;
   narratorProfile: SpeakerProfile;
   persona?: PatientSimulatorPersona;
+  /** clinical | pizarro — same chassis, different pack */
+  worldMode?: 'clinical' | 'pizarro';
   /** Voice transcript from STT */
   transcript: string;
   transcriptFinal: boolean;
@@ -213,6 +215,7 @@ export function useEncounter(props: UseEncounterProps): UseEncounterReturn {
         persona,
         currentPhase: phaseRef.current,
         messages: newMessages,
+        worldMode: props.worldMode ?? 'clinical',
       };
 
       let streamedText = '';
@@ -290,7 +293,7 @@ export function useEncounter(props: UseEncounterProps): UseEncounterReturn {
         busyRef.current = false;
       }
     },
-    [props.llmConfig, props.ttsConfig, props.patientProfile, props.onAnatomyMentioned, persona]
+    [props.llmConfig, props.ttsConfig, props.patientProfile, props.onAnatomyMentioned, props.worldMode, persona]
   );
 
   // Watch for final voice transcripts and feed them to the LLM

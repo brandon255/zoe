@@ -10,8 +10,13 @@ import {
 } from './llm';
 import {
   PatientSimulatorPersona,
-  buildPatientSystemPrompt,
 } from '../data/patientSimulatorPersona';
+import { buildWorldSystemPrompt } from '../data/worldPrompts';
+import type { WorldMode } from '../data/worldMode';
+import {
+  detectHardRailViolation,
+  hardRailRefusalMessage,
+} from '../data/worldMode';
 
 export interface EncounterMessage {
   role: 'doctor' | 'patient';
@@ -23,6 +28,7 @@ export interface EncounterContext {
   persona: PatientSimulatorPersona;
   currentPhase: string;
   messages: EncounterMessage[];
+  worldMode?: WorldMode;
 }
 
 export interface PatientResponseCallbacks {
@@ -39,7 +45,9 @@ function buildEncounterMessages(
   context: EncounterContext,
   doctorText: string
 ): ChatMessage[] {
-  const systemPrompt = buildPatientSystemPrompt(
+  const worldMode = context.worldMode ?? 'clinical';
+  const systemPrompt = buildWorldSystemPrompt(
+    worldMode,
     context.persona,
     context.currentPhase
   );
@@ -65,15 +73,21 @@ export async function streamPatientResponse(
   doctorText: string,
   callbacks: PatientResponseCallbacks
 ): Promise<void> {
-  const messages = buildEncounterMessages(context, doctorText);
+  const violation = detectHardRailViolation(doctorText);
+  if (violation) {
+    const msg = hardRailRefusalMessage(violation);
+    callbacks.onComplete(msg);
+    return;
+  }
 
-  // Override the system prompt to use the patient persona
+  const messages = buildEncounterMessages(context, doctorText);
+  const worldMode = context.worldMode ?? 'clinical';
+
   const patientConfig: LLMConfig = {
     ...config,
     systemPrompt: messages[0].content,
-    // Higher temperature for more natural patient variability
-    temperature: 0.8,
-    maxTokens: 200, // Keep patient responses short
+    temperature: worldMode === 'pizarro' ? 0.95 : 0.8,
+    maxTokens: worldMode === 'pizarro' ? 280 : 200,
   };
 
   await streamChatCompletion(patientConfig, messages.slice(1), callbacks);

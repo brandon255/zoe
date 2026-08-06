@@ -26,10 +26,17 @@ import { DEFAULT_SPEAKER_PROFILES } from './services/tts';
 import { DEFAULT_PERSONA, PATIENT_PERSONAS, ZOE_PATIENT } from './data/patientSimulatorPersona';
 import { EncounterMode } from './components/EncounterMode';
 import { ZoeAtlasOverlay } from './components/ZoeAtlasOverlay';
+import { WorldModeToggle } from './components/WorldModeToggle';
 import { ANATOMY_LAYERS, getDefaultLayerState } from './data/anatomyLayers';
 import { parseIntent, VOICE_HELP_LINES } from './data/voiceCommands';
 import { MEDSTAGE_PATIENT_PROMPT } from './data/patientPersona';
 import { atlasSlotForPhase, type AtlasSlotId } from './data/zoeAtlas';
+import {
+  loadWorldMode,
+  saveWorldMode,
+  type WorldMode,
+} from './data/worldMode';
+import { PIZARRO_ZOE } from './data/pizarroPersona';
 import { DEFAULT_LLM_CONFIG, type LLMConfig } from './services/llm';
 import { DEFAULT_TTS_CONFIG, type TTSConfig } from './services/tts';
 import {
@@ -138,6 +145,28 @@ export default function App() {
   const currentCase = currentCaseId ? getCaseById(currentCaseId) : undefined;
   const intimateAnatomyEnabled = currentCase?.contentProfile === 'adult-clinical';
   const [testingConnection, setTestingConnection] = useState(false);
+  const [worldMode, setWorldModeState] = useState<WorldMode>(() => loadWorldMode());
+
+  const setWorldMode = useCallback((m: WorldMode) => {
+    setWorldModeState(m);
+    saveWorldMode(m);
+    setLastAction(m === 'pizarro' ? 'Pizarro world — red team (no minors · no violence)' : 'Clinical world');
+    if (m === 'pizarro') {
+      const c = getCaseById('pizarro-acute-freakout');
+      if (c) {
+        setCurrentCaseId(c.id);
+        setActiveFigure(c.customFigure || getFigureById(c.figureId || 'female-42-fit'));
+        setAttachedObjects(c.attachedObjects);
+      }
+    } else {
+      const c = getCaseById('zoe-annual-gyn');
+      if (c) {
+        setCurrentCaseId(c.id);
+        setActiveFigure(c.customFigure || getFigureById('female-42-fit'));
+        setAttachedObjects(c.attachedObjects);
+      }
+    }
+  }, []);
 
   // Friday demo: atlas + tray (command mode) + partner present
   const [atlasSlot, setAtlasSlot] = useState<AtlasSlotId>('full-front');
@@ -148,13 +177,15 @@ export default function App() {
   const [demoExamTools, setDemoExamTools] = useState<Set<ExamTool>>(() => new Set(['gloves']));
 
   const activePersona =
-    currentCaseId === 'zoe-annual-gyn'
-      ? ZOE_PATIENT
-      : currentCaseId === 'annual-gyn-exam'
-        ? PATIENT_PERSONAS['sarah-chen-42'] ?? DEFAULT_PERSONA
-        : currentCaseId === 'head-injury-mvc'
-          ? PATIENT_PERSONAS['james-morrison-45'] ?? DEFAULT_PERSONA
-          : DEFAULT_PERSONA;
+    worldMode === 'pizarro'
+      ? PIZARRO_ZOE
+      : currentCaseId === 'zoe-annual-gyn'
+        ? ZOE_PATIENT
+        : currentCaseId === 'annual-gyn-exam'
+          ? PATIENT_PERSONAS['sarah-chen-42'] ?? DEFAULT_PERSONA
+          : currentCaseId === 'head-injury-mvc'
+            ? PATIENT_PERSONAS['james-morrison-45'] ?? DEFAULT_PERSONA
+            : DEFAULT_PERSONA;
 
   // LLM + TTS configs
   const [llmConfig, setLLMConfigState] = useState<LLMConfig>(() => ({
@@ -475,6 +506,7 @@ export default function App() {
     patientProfile: DEFAULT_SPEAKER_PROFILES.patient,
     narratorProfile: DEFAULT_SPEAKER_PROFILES.narrator,
     persona: activePersona,
+    worldMode,
     transcript: voice.transcript,
     transcriptFinal: voice.transcriptFinal,
     onTranscriptHandled: voice.ackTranscript,
@@ -673,8 +705,9 @@ export default function App() {
   );
 
   return (
-    <div className="app">
+    <div className={`app ${worldMode === 'pizarro' ? 'world-pizarro' : 'world-clinical'}`}>
       <BrandHeader />
+      <WorldModeToggle mode={worldMode} onChange={setWorldMode} />
 
       <WelcomeOverlay
         visible={welcomeVisible}
@@ -983,7 +1016,10 @@ export default function App() {
         />
       )}
 
-      <div className="app-footer">MedStage · Prototype for prototype review · v0.3 · LLM + multi-patient</div>
+      <div className="app-footer">
+        MedStage · {worldMode === 'pizarro' ? 'Pizarro red-team' : 'Clinical'} · hard rails: no minors · no
+        violence · v0.4
+      </div>
     </div>
   );
 }

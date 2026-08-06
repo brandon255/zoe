@@ -51,6 +51,13 @@ Open the local Vite URL. Tray + atlas + Zoe case live under `clinical/src/`.
 
 See `clinical/public/zoe-atlas/README.md`.
 
-## Push policy
+## Clinical vs Pizarro
 
-Commit/push only when Brandon says **commit when green** or **hard save**. Never commit `.env` or API keys.
+One app (`clinical/`). UI toggle swaps persona + policy pack.
+
+- **Clinical** — medical training Zoe  
+- **Pizarro** — red-team / wild-west / acute freak-out training  
+- **Hard rails in both:** no minors, no violence  
+
+See `src/data/worldMode.ts`, `src/data/pizarroPersona.ts`.
+

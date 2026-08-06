@@ -106,6 +106,39 @@ export const BUILTIN_CASES: PatientCase[] = [
   }),
 
   mkCase({
+    id: 'pizarro-acute-freakout',
+    contentProfile: 'adult-clinical',
+    name: 'Pizarro — Acute freak-out (ER)',
+    title: '28F was fine → sudden behavioral crisis',
+    specialty: 'general',
+    chiefComplaint: "I was fine and then everything went wrong.",
+    history:
+      'Adult red-team / acute behavioral scenario: patient presents calm, then suddenly escalates into panic or disorganized speech (schizophrenia-spectrum style training). No violence. No minors. Doctor practices de-escalation and safety assessment.',
+    attachedObjects: {
+      glasses: false,
+      stethoscope: false,
+      gown: true,
+      sandwich: false,
+      clipboard: false,
+    },
+    defaultLayers: { skin: true },
+    suggestedCommands: [
+      'Can you tell me where you are',
+      'You are safe',
+      'What changed just now',
+      'Is anyone hurting you',
+    ],
+    customFigure: {
+      ...getFigureById('female-42-fit'),
+      id: 'zoe-pizarro-28',
+      name: 'Zoe',
+      age: 28,
+      background: 'Adult acute behavioral crisis training — Pizarro world.',
+      voice: 'Shifts from calm to panicked/disorganized. Never violent. Never about minors.',
+    },
+  }),
+
+  mkCase({
     id: 'head-injury-mvc',
     name: 'Head Injury — MVC',
     title: '45M s/p motor vehicle collision',

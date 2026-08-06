@@ -24,9 +24,15 @@ npm run dev
 5. Atlas view swaps with each beat (when atlas files present)  
 6. Encounter mode for LLM patient replies (paste hosted API key in Settings)
 
-## LLM
+## World modes (same chassis)
 
-Hosted GLM and/or MiniMax for Friday (cheap). Local LLM is product later — not required for noon.
+| Switch | Pack | Hard rails |
+|--------|------|------------|
+| **Clinical** | Zoe annual gyn + medical personas | No minors · no violence (+ full clinical tone) |
+| **Pizarro** | Red-team / acute freak-out | **Only** absolute bans: no minors · no violence |
+
+Flip the header toggle. Encounter mode loads the matching persona + system prompt. No second server.
+
 
 ## Honest narrative
 
